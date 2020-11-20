@@ -41,7 +41,7 @@ When creating an EC2 Instance we also have a file called `ec2.tf`. This file con
 
 ## Understanding Each File
 
-Below is a high level explentation fo each configuation file higlighted above. 
+Below is a high level explantation of each configuation file higlighted above. 
 
 #### **`main.tf`** 
 - Contains the Terraform Provider. The provider is responsible for understanding API interactions and exposing resources that configure resources in a specific infrastructure platform. I will be using the `AWS` provider, but there are providers for about every cloud platform.  
@@ -81,7 +81,7 @@ resource "aws_instance" "my_instance" {
   provider = aws.second
 }
 ````
-- It also contains the configuration of the state file. The state file extremly important. It explains to Terraform what our infrastructure looks like and compares the current configuration versus what's changed in the terraform config files when running `terraform plan` and `terraform apply`
+- It also contains the configuration of the state file. The state file is extremly important. It explains to Terraform what our infrastructure looks like and compares the current configuration versus what's changed in the terraform config files when running `terraform plan` and `terraform apply`
 - State files can be stored localy or in a backend system. When working collaboratively with others on production or dev infrastructure **never** store your state file locally or in git.
 - I recommend utilizing a dedicated S3 bucket for all tf state files. You can use the S3 backend by changing the backend like this: 
 
@@ -145,5 +145,6 @@ module "my_instance_name" {
   name   = var.name
   key    = var.key
   ami    = data.aws_ami.windows
+  ...
 }
 ```
