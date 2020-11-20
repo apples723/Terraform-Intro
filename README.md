@@ -1,5 +1,4 @@
 # Terraform-Intro
-Contains a simple guide I wrote for my coworkers going over the basics of Terraform. It also demonstrates how to spin up an EC2 instance using the Terraform AWS EC2 Module.
 
 ## Overview 
 
