@@ -2,7 +2,7 @@
 
 ## Overview 
 
-The guide explains the basic setup of terraform module, and how to spin up an EC2 Instance using the Terraform AWS EC2 Module
+The guide explains the basic setup of terraform module, and how to spin up an EC2 Instance using the [Terraform AWS EC2 Module](https://github.com/terraform-aws-modules/terraform-aws-ec2-instance).
 
 ## Terraform Folder Structure
 
@@ -29,7 +29,7 @@ There are many ways to organize terraform configuration files. Below is the way 
 │   └── README.md
 ```
 
-The top level folder is TF-Infrastructure, this holds all of the configurations for Prod and Dev, it's best to use Git repository so we can version control our infrastructure.
+The top level folder is TF-Infrastructure, this holds all of the configurations for Prod and Dev, it's best to use Git repository so you can version control our infrastructure.
 
 Every modlue should have at the very least the following:
 
@@ -37,7 +37,7 @@ Every modlue should have at the very least the following:
 - `variables.tf` - Contains all variables used in the module
 - `outputs.tf` - Contains all the outputs from the module that you may want to reference in a different module.
 
-When creating an EC2 Instance we also have a file called `EC2.TF`. This file contains the official Terraform AWS EC2 module. You also can utlize the `aws_instance` resource to create an instance, it really depends on your use case. 
+When creating an EC2 Instance we also have a file called `ec2.tf`. This file contains the official Terraform AWS EC2 module. You also can utlize the `aws_instance` resource to create an instance, it really depends on your use case. 
 
 ## Understanding Each File
 
@@ -64,7 +64,7 @@ provider "aws" {
   }
 }
 ````
-- If you need a second account you can declare another provider and assign it an allias, then inside of a resourcce you can add the argument `provider` and add call the provider's allias: 
+- If you need a second account you can declare another provider and assign it an alias, then inside of a resourcce you can add the argument `provider` and add call the provider's alias: 
 ```
 provider "aws" {
   provider = "aws"
@@ -72,7 +72,7 @@ provider "aws" {
   assume_role {
     role_arn = "second_account_full_arn" 
   }
-  allias   = "second"
+  alias   = "second"
 }
 
 resource "aws_instance" "my_instance" {
@@ -82,7 +82,7 @@ resource "aws_instance" "my_instance" {
 }
 ````
 - It also contains the configuration of the state file. The state file extremly important. It explains to Terraform what our infrastructure looks like and compares the current configuration versus what's changed in the terraform config files when running `terraform plan` and `terraform apply`
-- State files can be stored localy or in a backend system. When working colabrativily with others on production or dev infrastructure **never** store your state file locally or in git.
+- State files can be stored localy or in a backend system. When working collaboratively with others on production or dev infrastructure **never** store your state file locally or in git.
 - I recommend utilizing a dedicated S3 bucket for all tf state files. You can use the S3 backend by changing the backend like this: 
 
 ````
@@ -122,7 +122,7 @@ resource "aws_instance" "my_instance" {
 
 #### **`outputs.tf`**
 
-- Contains all outputs values from a Terraform module that you can then call from other modules using a `data source` to fetch or computed for use elsewhere in a Terraform configuration
+- Contains all outputs values from a Terraform module that you can then call from other modules using a `data source` to fetch for use elsewhere in a Terraform configuration
 
 
 # Utilizing the AWS EC2 Module
